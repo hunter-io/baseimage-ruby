@@ -1,0 +1,25 @@
+name: Create and publish the Ruby base image
+on: push
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Build and push tagged version
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ghcr.io/hunter-io/baseimage-ruby:${GITHUB_HEAD_REF##*/}
+      - if: github.ref == 'refs/heads/main'
+        name: Build and push latest
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ghcr.io/hunter-io/baseimage-ruby:latest

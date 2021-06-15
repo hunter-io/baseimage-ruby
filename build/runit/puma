@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+cd $RAILS_ROOT && exec bash -lc "bin/bundle exec puma -C config/puma.rb"
