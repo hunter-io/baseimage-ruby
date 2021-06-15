@@ -2,12 +2,17 @@ FROM phusion/baseimage:focal-1.0.0
 
 SHELL ["/bin/bash", "-lc"]
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update && apt-get install -y \
   libjemalloc-dev \
   libpq-dev \
   nginx \
   nodejs \
-  openssl
+  openssl \
+  yarn
 
 # Install RVM and Ruby
 RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys \
@@ -21,6 +26,7 @@ RUN rvm use --default ruby-2.7.2
 # Set the required environment variables
 ENV RACK_ENV production
 ENV RAILS_ENV production
+ENV NODE_ENV production
 ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-2.7.2/bin
 ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-2.7.2/bin
 ENV GEM_HOME /usr/local/rvm/gems/ruby-2.7.2
