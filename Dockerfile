@@ -35,6 +35,7 @@ ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-2.7.2/bin
 ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-2.7.2/bin
 ENV GEM_HOME /usr/local/rvm/gems/ruby-2.7.2
 ENV GEM_PATH /usr/local/rvm/gems/ruby-2.7.2
+ENV LD_PRELOAD=${LD_PRELOAD}:/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 # Install Bundler
 RUN gem update --system 3.1.3 --no-document
