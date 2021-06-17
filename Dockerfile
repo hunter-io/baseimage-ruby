@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y \
   openssl \
   yarn
 
+# Create missing directory for git-daemon to work properly with runit
+RUN mkdir -p /var/lib/supervise/git-daemon
+
 # Install RVM and Ruby
 RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys \
        409B6B1796C275462A1703113804BB82D39DC0E3 \
@@ -32,6 +35,7 @@ ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-2.7.2/bin
 ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-2.7.2/bin
 ENV GEM_HOME /usr/local/rvm/gems/ruby-2.7.2
 ENV GEM_PATH /usr/local/rvm/gems/ruby-2.7.2
+ENV LD_PRELOAD=${LD_PRELOAD}:/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 # Install Bundler
 RUN gem update --system 3.1.3 --no-document
