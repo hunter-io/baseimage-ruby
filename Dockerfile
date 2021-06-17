@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y \
   openssl \
   yarn
 
+# Create missing directory for git-daemon to work properly with runit
+RUN mkdir -p /var/lib/supervise/git-daemon
+
 # Install RVM and Ruby
 RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys \
        409B6B1796C275462A1703113804BB82D39DC0E3 \
