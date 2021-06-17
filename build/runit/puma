@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-cd $RAILS_ROOT && exec bash -lc "bin/bundle exec puma -C config/puma.rb"
+cd $RAILS_ROOT && exec bash -lc "LD_PRELOAD=$LD_PRELOAD:/lib/x86_64-linux-gnu/libjemalloc.so.2 bin/bundle exec puma -C config/puma.rb"
