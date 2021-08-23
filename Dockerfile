@@ -3,8 +3,12 @@ FROM phusion/baseimage:focal-1.0.0
 SHELL ["/bin/bash", "-lc"]
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN echo "deb https://nginx.org/packages/ubuntu/ focal nginx\ndeb-src https://nginx.org/packages/ubuntu/ focal nginx" | tee /etc/apt/sources.list.d/nginx.list
 
 RUN apt-get update && apt-get install -y \
   git-all \
