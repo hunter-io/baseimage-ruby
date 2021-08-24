@@ -8,7 +8,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN echo "deb https://nginx.org/packages/ubuntu/ focal nginx\ndeb-src https://nginx.org/packages/ubuntu/ focal nginx" | tee /etc/apt/sources.list.d/nginx.list
+RUN echo -e "deb https://nginx.org/packages/ubuntu/ focal nginx\ndeb-src https://nginx.org/packages/ubuntu/ focal nginx" | tee /etc/apt/sources.list.d/nginx.list
 
 RUN apt-get update && apt-get install -y \
   git-all \
@@ -23,9 +23,8 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /var/lib/supervise/git-daemon
 
 # Install RVM and Ruby
-RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys \
-       409B6B1796C275462A1703113804BB82D39DC0E3 \
-       7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
+  && curl -sSL https://rvm.io/pkuczynski.asc | gpg --import - \
   && curl -L https://get.rvm.io | bash -s stable
 
 RUN rvm install ruby-2.7.2 -C --with-jemalloc
