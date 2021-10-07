@@ -2,6 +2,8 @@ FROM phusion/baseimage:focal-1.0.0
 
 SHELL ["/bin/bash", "-lc"]
 
+RUN apt-get update && apt-get install -y ca-certificates
+
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -27,21 +29,21 @@ RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
   && curl -sSL https://rvm.io/pkuczynski.asc | gpg --import - \
   && curl -L https://get.rvm.io | bash -s stable
 
-RUN rvm install ruby-2.7.2 -C --with-jemalloc
-RUN rvm use --default ruby-2.7.2
+RUN rvm install ruby-3.0.2 -C --with-jemalloc
+RUN rvm use --default ruby-3.0.2
 
 # Set the required environment variables
 ENV RACK_ENV production
 ENV RAILS_ENV production
 ENV NODE_ENV production
-ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-2.7.2/bin
-ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-2.7.2/bin
-ENV GEM_HOME /usr/local/rvm/gems/ruby-2.7.2
-ENV GEM_PATH /usr/local/rvm/gems/ruby-2.7.2
+ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-3.0.2/bin
+ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-3.0.2/bin
+ENV GEM_HOME /usr/local/rvm/gems/ruby-3.0.2
+ENV GEM_PATH /usr/local/rvm/gems/ruby-3.0.2
 ENV LD_PRELOAD=${LD_PRELOAD}:/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 # Install Bundler
-RUN gem update --system 3.1.3 --no-document
+RUN gem update --system 3.2.3 --no-document
 RUN gem install bundler
 
 COPY build build
