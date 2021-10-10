@@ -27,10 +27,10 @@ RUN mkdir -p /var/lib/supervise/git-daemon
 
 # Install RVM and Ruby
 RUN gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
-  && curl -sSL https://get.rvm.io | bash -s stable --without-gems="rvm rubygems-bundler"
+  && curl -sSL https://get.rvm.io | bash -s stable
 
-RUN rvm install ruby-3.0.2 -C --with-jemalloc
-RUN rvm use --default ruby-3.0.2
+RUN rvm install ruby-3.0.2 -C --with-jemalloc \
+  && rvm use --default ruby-3.0.2
 
 # Set the required environment variables
 ENV RACK_ENV production
@@ -41,9 +41,6 @@ ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-3.0.2/bin
 ENV GEM_HOME /usr/local/rvm/gems/ruby-3.0.2
 ENV GEM_PATH /usr/local/rvm/gems/ruby-3.0.2
 ENV LD_PRELOAD=${LD_PRELOAD}:/lib/x86_64-linux-gnu/libjemalloc.so.2
-
-# Install Bundler
-RUN gem update --system --no-document && gem install bundler -v "2.2.29"
 
 COPY build build
 
