@@ -5,7 +5,8 @@ set -e
 cp build/nginx/nginx.conf /etc/nginx/nginx.conf
 mkdir -p /etc/nginx/main.d
 cp build/nginx/nginx_main_d_default.conf /etc/nginx/main.d/default.conf
-rm /etc/nginx/sites-enabled/default
+mkdir -p /etc/nginx/sites-enabled
+rm /etc/nginx/conf.d/default.conf
 
 # Install Nginx runit service
 mkdir /etc/service/nginx
