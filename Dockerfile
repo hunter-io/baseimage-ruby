@@ -29,17 +29,17 @@ RUN mkdir -p /var/lib/supervise/git-daemon
 RUN gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
   && curl -sSL https://get.rvm.io | bash -s stable
 
-RUN rvm install ruby-3.1.0 -C --with-jemalloc \
-  && rvm use --default ruby-3.1.0
+RUN rvm install ruby-3.1.2 -C --with-jemalloc \
+  && rvm use --default ruby-3.1.2
 
 # Set the required environment variables
 ENV RACK_ENV production
 ENV RAILS_ENV production
 ENV NODE_ENV production
-ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-3.1.0/bin
-ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-3.1.0/bin
-ENV GEM_HOME /usr/local/rvm/gems/ruby-3.1.0
-ENV GEM_PATH /usr/local/rvm/gems/ruby-3.1.0
+ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-3.1.2/bin
+ENV PATH=${PATH}:/usr/local/rvm/gems/ruby-3.1.2/bin
+ENV GEM_HOME /usr/local/rvm/gems/ruby-3.1.2
+ENV GEM_PATH /usr/local/rvm/gems/ruby-3.1.2
 ENV LD_PRELOAD=${LD_PRELOAD}:/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 COPY build build
