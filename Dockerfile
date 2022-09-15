@@ -4,11 +4,10 @@ SHELL ["/bin/bash", "-lc"]
 
 RUN apt-get update && apt-get install -y ca-certificates
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
 
 RUN curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN echo -e "deb https://nginx.org/packages/ubuntu/ focal nginx\ndeb-src https://nginx.org/packages/ubuntu/ focal nginx" | tee /etc/apt/sources.list.d/nginx.list
 
 RUN apt-get update && apt-get install -y \
