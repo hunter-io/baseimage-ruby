@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
   libpq-dev \
   nginx \
   nodejs \
-  openssl
+  openssl \
+  rustc
 
 # Create missing directory for git-daemon to work properly with runit
 RUN mkdir -p /var/lib/supervise/git-daemon
