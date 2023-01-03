@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
   nginx \
   nodejs \
   openssl \
-  rustc
+  rustc \
+  xz-utils
 
 # Create missing directory for git-daemon to work properly with runit
 RUN mkdir -p /var/lib/supervise/git-daemon
