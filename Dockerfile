@@ -1,4 +1,4 @@
-FROM phusion/baseimage:focal-1.0.0
+FROM phusion/baseimage:jammy-1.0.1
 
 SHELL ["/bin/bash", "-lc"]
 
@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
 
 RUN curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 
-RUN echo -e "deb https://nginx.org/packages/ubuntu/ focal nginx\ndeb-src https://nginx.org/packages/ubuntu/ focal nginx" | tee /etc/apt/sources.list.d/nginx.list
+RUN echo -e "deb https://nginx.org/packages/ubuntu/ jammy nginx\ndeb-src https://nginx.org/packages/ubuntu/ jammy nginx" | tee /etc/apt/sources.list.d/nginx.list
 
 RUN apt-get update && apt-get install -y \
   git-all \
