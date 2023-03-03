@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install -y \
   nodejs \
   openssl \
   rustc \
-  xz-utils
+  xz-utils \
+  && apt-get clean \
+  && apt-get autoremove -y
 
 # Create missing directory for git-daemon to work properly with runit
 RUN mkdir -p /var/lib/supervise/git-daemon
@@ -29,7 +31,8 @@ RUN gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E206
   && curl -sSL https://get.rvm.io | bash -s stable
 
 RUN rvm install ruby-3.2.1 -C --with-jemalloc \
-  && rvm use --default ruby-3.2.1
+  && rvm use --default ruby-3.2.1 \
+  && rvm cleanup all
 
 # Set the required environment variables
 ENV RACK_ENV production
