@@ -13,6 +13,7 @@ RUN echo -e "deb https://nginx.org/packages/ubuntu/ jammy nginx\ndeb-src https:/
 RUN apt-get update && apt-get install -y \
   git-all \
   gnupg2 \
+  libicu-dev \
   libjemalloc-dev \
   libpq-dev \
   nginx \
